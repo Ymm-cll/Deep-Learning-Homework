@@ -1,13 +1,12 @@
-# 导入selenium和其他需要的库
+# 导入库
 import time
-import random
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import pandas as pd
 
-class spider():
+#spider类，实现爬取指定彩票，指定期数的功能
+class Spider():
     def __init__(self,lottery_name,start_num=-1,end_num=-1):
         #参数传递
         self.lottery_name=lottery_name
@@ -98,3 +97,5 @@ class spider():
         #关闭浏览器
         driver.close()
         driver.quit()
+    def get_name(self):
+        return self.lottery_name

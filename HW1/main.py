@@ -1,4 +1,7 @@
-from Spider import spider
+import re
+from spider import Spider
+from data_processor import Data_processor as dp
 
-qxc=spider("sd",1)
-print(qxc.visit())
+lottery=Spider("qxc")
+processor=dp(lottery.get_name(),lottery.visit())
+data=processor.process()
