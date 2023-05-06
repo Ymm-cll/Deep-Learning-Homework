@@ -20,6 +20,7 @@ class spider():
             self.spider_1()
         else:
             self.spider_2()
+        return self.data
     def spider_1(self):
         # 创建一个webdriver对象，使用Chrome浏览器
         driver = webdriver.Chrome()
@@ -43,12 +44,17 @@ class spider():
             end.send_keys(self.end_num)
         #定位搜索按钮节点，并click
         if self.start_num != -1 or self.end_num !=-1:
-            button = driver.find_element_by_xpath('/html/body/table/tbody/tr[1]/td/div/div/div/div[1]/div/table/tbody/tr/td[2]/img')
+            if self.lottery_name in ['qxc','plw']:
+                button = driver.find_element_by_xpath(
+                    '/html/body/table/tbody/tr[1]/td/div/div/div/div[1]/div/table/tbody/tr/td[2]/img')
+            if self.lottery_name in ['pls','sd']:
+                button = driver.find_element_by_xpath(
+                    '/html/body/div/div/table/tbody/tr[1]/td/div/div[1]/div/table/tbody/tr/td[2]/img')
             button.click()
-            time.sleep(random.randint(0,2))
+            time.sleep(2)
         #定位id=“chart”的节点
         chart=driver.find_element_by_class_name("chart")
-        time.sleep(random.randint(0,2))
+        time.sleep(2)
         #参数传递
         self.data=chart.text
         #关闭浏览器
@@ -75,16 +81,20 @@ class spider():
             end.send_keys(self.end_num)
         #定位搜索按钮节点，并click
         if self.start_num != -1 or self.end_num !=-1:
-            button = driver.find_element_by_xpath('/html/body/table/tbody/tr[1]/td/div/div/div/div[1]/div/table/tbody/tr/td[2]/img')
+            button=0
+            if self.lottery_name in ['qlc', 'ssq']:
+                button = driver.find_element_by_xpath(
+                    '/html/body/table/tbody/tr[1]/td/div/div/table/tbody/tr[1]/td/div/div[1]/div/table/tbody/tr/td[2]/img')
+            if self.lottery_name == 'dlt':
+                button = driver.find_element_by_xpath(
+                    '/html/body/table/tbody/tr[1]/td/div/div/div/table/tbody/tr/td/div/div[1]/div/table/tbody/tr/td[2]/img')
             button.click()
-            time.sleep(random.randint(0,2))
+            time.sleep(2)
         #定位id=“chart”的节点
         chart=driver.find_element_by_id("datachart")
-        time.sleep(random.randint(0,2))
+        time.sleep(2)
         #参数传递
         self.data=chart.text
         #关闭浏览器
         driver.close()
         driver.quit()
-    def get_data(self):
-        return self.data

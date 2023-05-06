@@ -1,5 +1,4 @@
 from Spider import spider
 
-qxc=spider("dlt")
-qxc.visit()
-print(qxc.get_data())
+qxc=spider("sd",1)
+print(qxc.visit())
