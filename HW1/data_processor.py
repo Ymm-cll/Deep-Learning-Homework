@@ -1,7 +1,10 @@
+#导入依赖
 import re
 
+#定义数据处理的类
 class Data_processor():
     def __init__(self,lottery_name,data_raw):
+        #保存值
         self.lottery_name=lottery_name
         self.data_raw=data_raw
         self.lotterys=[]
@@ -9,6 +12,7 @@ class Data_processor():
         #索引字典：期号，中奖号码开始，中奖号码结束，销售额，时间
         self.dict={"qxc":[0,1,7,9,10]}
     def str2int(self):
+        #字符转化为整数
         data = self.data_raw.replace(",", "").split("\n")
         data_new = []
         for line in data:
@@ -20,6 +24,7 @@ class Data_processor():
             data_new.append(line_new)
         return data_new
     def extract(self,data_new):
+        #提取目标数据
         self.lotterys.append(self.lottery_name)
         for line in data_new[2:]:
             lottery={}
@@ -29,5 +34,6 @@ class Data_processor():
             lottery["date"] = line[self.dict[self.lottery_name][4]]
             self.lotterys.append(lottery)
     def process(self):
+        #整合函数
         self.extract(self.str2int())
         return self.lotterys
