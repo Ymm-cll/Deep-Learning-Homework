@@ -7,7 +7,7 @@ from selenium.webdriver.support import expected_conditions as EC
 
 #spider类，实现爬取指定彩票，指定期数的功能
 class Spider():
-    def __init__(self,lottery_name,start_num=-1,end_num=-1):
+    def __init__(self,lottery_name,start_num=0,end_num=0):
         #参数传递
         self.lottery_name=lottery_name
         self.start_num=start_num
@@ -22,6 +22,10 @@ class Spider():
         return self.data
     def spider_1(self):
         # 创建一个webdriver对象，使用Chrome浏览器
+        option = webdriver.ChromeOptions()
+        option.add_argument("headless")
+        option.add_argument("--ignore-certificate-error")
+        option.add_argument("--ignore-ssl-errors")
         driver = webdriver.Chrome()
         # 访问目标网址
         url1="http://datachart.500.com/"
@@ -33,16 +37,17 @@ class Spider():
         wait=WebDriverWait(driver,10)
         wait.until(EC.presence_of_element_located((By.CLASS_NAME,'chart')))
         #定位开始和结束的input框,并设置期号
-        if self.start_num != -1:
+        if self.start_num != 0:
             start=driver.find_element_by_id("start")
             start.clear()
             start.send_keys(self.start_num)
-        if self.end_num != -1:
+        if self.end_num != 0:
             end=driver.find_element_by_id("end")
             end.clear()
             end.send_keys(self.end_num)
         #定位搜索按钮节点，并click
-        if self.start_num != -1 or self.end_num !=-1:
+        if self.start_num != 0 or self.end_num !=0:
+            button=0
             if self.lottery_name in ['qxc','plw']:
                 button = driver.find_element_by_xpath(
                     '/html/body/table/tbody/tr[1]/td/div/div/div/div[1]/div/table/tbody/tr/td[2]/img')
@@ -61,6 +66,10 @@ class Spider():
         driver.quit()
     def spider_2(self):
         # 创建一个webdriver对象，使用Chrome浏览器
+        option = webdriver.ChromeOptions()
+        option.add_argument("headless")
+        option.add_argument("--ignore-certificate-error")
+        option.add_argument("--ignore-ssl-errors")
         driver = webdriver.Chrome()
         # 访问目标网址
         url1="http://datachart.500.com/"
@@ -70,16 +79,16 @@ class Spider():
         wait=WebDriverWait(driver,10)
         wait.until(EC.presence_of_element_located((By.ID,'datachart')))
         #定位开始和结束的input框,并设置期号
-        if self.start_num != -1:
+        if self.start_num != 0:
             start=driver.find_element_by_id("start")
             start.clear()
             start.send_keys(self.start_num)
-        if self.end_num != -1:
+        if self.end_num != 0:
             end=driver.find_element_by_id("end")
             end.clear()
             end.send_keys(self.end_num)
         #定位搜索按钮节点，并click
-        if self.start_num != -1 or self.end_num !=-1:
+        if self.start_num != 0 or self.end_num !=0:
             button=0
             if self.lottery_name in ['qlc', 'ssq']:
                 button = driver.find_element_by_xpath(

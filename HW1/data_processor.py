@@ -20,6 +20,7 @@ class Data_processor():
             data_new.append(line_new)
         return data_new
     def extract(self,data_new):
+        self.lotterys.append(self.lottery_name)
         for line in data_new[2:]:
             lottery={}
             lottery["issue_num"]=line[self.dict[self.lottery_name][0]]
