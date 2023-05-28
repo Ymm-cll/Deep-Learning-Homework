@@ -6,7 +6,7 @@ import time
 import warnings
 from enum import Enum
 
-# from torchsummary import summary
+from torchsummary import summary
 import time
 from tqdm import tqdm
 import torch
@@ -63,7 +63,7 @@ parser.add_argument('--resume', default='', type=str, metavar='PATH',
                     help='path to latest checkpoint (default: none)')
 parser.add_argument('-e', '--evaluate', dest='evaluate', action='store_true',
                     help='evaluate model on validation set')
-parser.add_argument('--pretrained', dest='pretrained', action='store_true',default=True,
+parser.add_argument('--pretrained', dest='pretrained', action='store_true',default=False,
                     help='use pre-trained model')
 parser.add_argument('--world-size', default=-1, type=int,
                     help='number of nodes for distributed training')
@@ -145,12 +145,12 @@ def main_worker(gpu, ngpus_per_node, args):
     # create model
     if args.pretrained:
         print("=> using pre-trained model '{}'".format(args.arch))
-        model = models.__dict__[args.arch](pretrained=True)
+        model = models.__dict__[args.arch](pretrained=True,num_classes=200)
     else:
         print("=> creating model '{}'".format(args.arch))
-        model = models.__dict__[args.arch]()
-    model.num_classes=200
-    # print(summary(model, (3, 64, 64), device="cpu"))
+        model = models.__dict__[args.arch](pretrained=False,num_classes=200)
+    print(model)
+    print(summary(model, (3, 64, 64), device="cpu"))
     """ # 获取模型的最后一层
     last_layer_name = list(model._modules.keys())[-1]
     last_layer = getattr(model, last_layer_name)
