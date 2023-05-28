@@ -68,14 +68,14 @@
              ReLU-65            [-1, 512, 2, 2]               0
        BasicBlock-66            [-1, 512, 2, 2]               0
 AdaptiveAvgPool2d-67            [-1, 512, 1, 1]               0
-           Linear-68                 [-1, 1000]         513,000
+           Linear-68                  [-1, 200]         102,600
 ================================================================
-Total params: 11,689,512
-Trainable params: 11,689,512
+Total params: 11,279,112
+Trainable params: 11,279,112
 Non-trainable params: 0
 ----------------------------------------------------------------
 Input size (MB): 0.05
-Forward/backward pass size (MB): 5.14
-Params size (MB): 44.59
-Estimated Total Size (MB): 49.78
+Forward/backward pass size (MB): 5.13
+Params size (MB): 43.03
+Estimated Total Size (MB): 48.20
 ----------------------------------------------------------------
